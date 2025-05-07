@@ -12,5 +12,4 @@ public class Board {
     private String content;
     private LocalDateTime regDt;
     private LocalDateTime modDt;
-    // 1
 }
