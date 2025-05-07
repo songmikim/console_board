@@ -1,14 +1,16 @@
 package org.koreait.board.mappers;
 
 import org.koreait.board.entities.Board;
+import org.koreait.board.entities.Board;
 import org.koreait.global.paging.SearchForm;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BoardMapper {
-    void register(Board board);
-
-    <T> ScopedValue<T> get(int posterId);
-
+    int register(Board item);
+    int update(Board item);
+    int delete(long seq);
     List<Board> getList(SearchForm search);
+    Optional<Board> get(long seq);
 }

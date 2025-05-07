@@ -1,10 +1,13 @@
 package org.koreait.board.services;
 
+import org.koreait.board.controllers.RequestBoard;
 import org.koreait.board.mappers.BoardMapper;
+import org.koreait.board.validators.BoardSaveValidator;
 import org.koreait.board.validators.BoardValidator;
 import org.koreait.global.configs.DBConn;
 import org.koreait.global.services.Bean;
 import org.koreait.global.services.Configuration;
+import org.koreait.global.validators.Validator;
 
 @Configuration
 public class BoardService {
@@ -22,4 +25,14 @@ public class BoardService {
     public BoardRegisterService registerService() {
         return new BoardRegisterService(boardValidator(), boardMapper());
     }
+
+    @Bean
+    public BoardSaveService saveService() {
+        return new BoardSaveService(boardMapper(), boardSaveValidator());
+    }
+
+    private Validator<RequestBoard> boardSaveValidator() {
+        return null;
+    }
 }
+
