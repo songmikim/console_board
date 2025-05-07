@@ -1,7 +1,6 @@
 package org.koreait.board.controllers;
 
 import org.koreait.board.entities.Board;
-import org.koreait.board.entities.Board;
 import org.koreait.board.services.BoardDeleteService;
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.global.exceptions.CommonException;
@@ -14,19 +13,18 @@ import java.util.Scanner;
 
 public class BoardListController extends Controller {
     private final BoardInfoService service;
+    private final BoardDeleteService deleteService;
     private List<Board> items;
+    private SearchForm search;
 
-    public BoardListController(BoardInfoService service) {
+    public BoardListController(BoardInfoService service,  BoardDeleteService deleteService) {
         this.service = service;
-
-        // 초기 출력할 게시글 조회
-        SearchForm s = new SearchForm();
-        items = service.getList(s);
+        this.deleteService = deleteService;
+        search = new SearchForm();
 
         Scanner sc = new Scanner(System.in);
         setPrompt(() -> {
-            SearchForm search = new SearchForm();
-
+            search = new SearchForm();
             while(true) {
                 try {
                     System.out.println("조회할 항목을 선택하세요.");
@@ -63,20 +61,17 @@ public class BoardListController extends Controller {
                         }
                         return;
                     }
-                    items = service.getList(search);
                     show(); // 화면 갱신
 
-                    if (menu == 6) { // 게시글 삭제
+                    if (menu == 6) {
                         try {
-                            long seq = Long.parseLong(inputEach("2. 삭제할 게시글 번호", sc));
-
-                            // 삭제 서비스 호출
-                            BoardDeleteService deleteService = new BoardDeleteService(service.getMapper());
-                            deleteService.delete(seq);
-
-                            System.out.println("게시글이 삭제되었습니다.");
+                            long seq = Integer.parseInt(skey);
+                            deleteService.delete(seq);  // 실제 삭제 처리
+                            System.out.println("게시글이 성공적으로 삭제되었습니다.");
                         } catch (NumberFormatException e) {
-                            System.out.println("게시글 번호는 숫자만 입력 가능합니다.");
+                            System.out.println("게시글 번호는 숫자로 입력하세요.");
+                        } catch (CommonException e) {
+                            printError(e);
                         }
                         return;
                     }
@@ -90,6 +85,9 @@ public class BoardListController extends Controller {
 
     @Override
     public void show() {
+        // 초기 출력할 게시글 조회
+        items = service.getList(search);
+
         printLine();
         System.out.println("게시글번호|작성자|제목|내용");
         if (items == null || items.isEmpty()) {
