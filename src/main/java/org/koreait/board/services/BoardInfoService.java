@@ -1,7 +1,6 @@
 package org.koreait.board.services;
 
 import org.koreait.board.entities.Board;
-import org.koreait.board.entities.Board;
 import org.koreait.board.exceptions.BoardNotFoundException;
 import org.koreait.board.mappers.BoardMapper;
 import org.koreait.global.configs.DBConn;
@@ -30,7 +29,7 @@ public class BoardInfoService {
      */
     public Board get(long seq) {
         updateMapper();
-        return mapper.get(seq).orElseThrow(BoardNotFoundException::new);
+        return mapper.get(seq).orElseThrow(() -> new BoardNotFoundException("게시글을 찾을 수 없습니다."));
     }
 
     /**
@@ -53,6 +52,10 @@ public class BoardInfoService {
 
         // 페이징 기본값 처리 E
         return mapper.getList(search);
+    }
+
+    public BoardMapper getMapper() {
+        return null;
     }
 }
 

@@ -1,7 +1,6 @@
 package org.koreait.board.controllers;
 
 import org.koreait.board.entities.Board;
-import org.koreait.board.entities.Board;
 import org.koreait.board.exceptions.BoardNotFoundException;
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.global.router.Controller;
@@ -25,7 +24,7 @@ public class BoardViewController extends Controller {
 
     @Override
     public void show() {
-        if (seq < 1L) throw new BoardNotFoundException();
+        if (seq < 1L) throw new BoardNotFoundException("게시글을 찾을 수 없습니다.");
         // 게시글 조회
         Board item = service.get(seq);
 
