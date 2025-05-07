@@ -30,5 +30,13 @@ public class BoardService {
         return null;
     }
 
-}
 
+    public BoardInfoService infoService() {
+        return new BoardInfoService();
+    }
+
+    private Validator<RequestBoard> boardSaveValidator() {
+        return null;
+    }
+
+}

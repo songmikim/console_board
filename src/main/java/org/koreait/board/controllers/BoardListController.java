@@ -1,7 +1,7 @@
 package org.koreait.board.controllers;
 
 import org.koreait.board.entities.Board;
-import org.koreait.board.entities.Board;
+
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.paging.SearchForm;
@@ -33,6 +33,23 @@ public class BoardListController extends Controller {
                     String sel = inputEach("1. 항목번호", sc);
                     // 선택항목 1, 2, 3, 4 중에서만 선택가능
                     if (!List.of("1","2", "3", "4", "5").contains(sel)) {
+=======
+    private SearchForm search;
+
+    public BoardListController(BoardInfoService service) {
+        this.service = service;
+        search = new SearchForm();
+
+        Scanner sc = new Scanner(System.in);
+        setPrompt(() -> {
+            search = new SearchForm();
+            while(true) {
+                try {
+                    System.out.println("조회할 항목을 선택하세요.");
+                    System.out.println("1. 제목, 2. 내용");
+                    String sel = inputEach("1. 항목번호", sc);
+                    // 선택항목 1, 2 중에서만 선택가능
+                    if (!List.of("1", "2").contains(sel)) {
                         continue;
                     }
                     String sopt = null;
@@ -62,6 +79,7 @@ public class BoardListController extends Controller {
                         }
                         return;
                     }
+
                     items = service.getList(search);
                     show(); // 화면 갱신
                 } catch (CommonException e) {
@@ -76,6 +94,9 @@ public class BoardListController extends Controller {
     public void show() {
         printLine();
         System.out.println("게시글번호|작성자|제목|내용");
+        // 초기 출력할 게시글 조회
+        items = service.getList(search);
+
         if (items == null || items.isEmpty()) {
             System.out.println("조회된 게시글이 없습니다.");
         } else { // 게시글 출력
