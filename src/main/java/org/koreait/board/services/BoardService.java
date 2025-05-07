@@ -26,17 +26,17 @@ public class BoardService {
         return new BoardSaveService(boardMapper(), boardSaveValidator());
     }
 
-
-    @Bean
-    public BoardInfoService infoService() {
-        return new BoardInfoService();
-    }
-
     private Validator<RequestBoard> boardSaveValidator() {
         return null;
+    }
+
+
+    public BoardInfoService infoService() {
+        return new BoardInfoService();
     }
 
     @Bean
     public BoardDeleteService deleteService() { return new BoardDeleteService(boardMapper());}
 
 }
+
