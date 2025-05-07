@@ -6,7 +6,6 @@ import org.koreait.board.services.BoardInfoService;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.paging.SearchForm;
 import org.koreait.global.router.Controller;
-import org.koreait.global.router.Router;
 
 import java.util.List;
 import java.util.Scanner;
@@ -28,10 +27,10 @@ public class BoardListController extends Controller {
             while(true) {
                 try {
                     System.out.println("조회할 항목을 선택하세요.");
-                    System.out.println("1. 제목, 2. 내용, 3. 작성자, 4. 통합검색, 5. 게시글 보기, 6. 게시글 삭제");
+                    System.out.println("1. 제목, 2. 내용, 6. 게시글 삭제");
                     String sel = inputEach("1. 항목번호", sc);
                     // 선택항목 1, 2, 3, 4 중에서만 선택가능
-                    if (!List.of("1","2", "3", "4", "5", "6").contains(sel)) {
+                    if (!List.of("1","2", "6").contains(sel)) {
                         continue;
                     }
                     String sopt = null;
@@ -48,7 +47,7 @@ public class BoardListController extends Controller {
                     String skey = inputEach(menu == 5 ? "2. 게시글번호": "2. 검색키워드", sc);
                     search.setSkey(skey);
 
-                    if (menu == 5) { // 게시글 보기 화면으로 이동
+                    /*if (menu == 5) { // 게시글 보기 화면으로 이동
                         try {
                             // 게시글 번호 등록
                             long seq = Integer.parseInt(skey);
@@ -58,7 +57,7 @@ public class BoardListController extends Controller {
                             System.out.println("게시글 번호는 숫자로 입력하세요.");
                         }
                         return;
-                    }
+                    }*/
                     show(); // 화면 갱신
 
                     if (menu == 6) {
