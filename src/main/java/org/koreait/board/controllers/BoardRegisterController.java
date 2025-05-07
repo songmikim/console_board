@@ -1,5 +1,7 @@
 package org.koreait.board.controllers;
 
+import org.koreait.board.entities.Board;
+import org.koreait.board.services.BoardRegisterService;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.router.Controller;
 import org.koreait.global.router.Router;
