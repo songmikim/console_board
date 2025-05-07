@@ -1,9 +1,6 @@
 package org.koreait.global.configs;
 
-import org.koreait.board.controllers.BoardController;
-import org.koreait.board.controllers.BoardListController;
-import org.koreait.board.controllers.BoardRegisterController;
-import org.koreait.board.controllers.BoardUpdateController;
+import org.koreait.board.controllers.*;
 import org.koreait.board.services.BoardDeleteService;
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.board.services.BoardRegisterService;
@@ -78,6 +75,11 @@ public class ControllerConfig {
         BoardDeleteService deleteService = ServiceContainer.getBean(BoardDeleteService.class);
         return new BoardListController(service, deleteService);
 
+    }
+
+    public BoardViewController boardViewController() {
+        BoardInfoService service = ServiceContainer.getBean(BoardInfoService.class);
+        return new BoardViewController(service);
     }
 
 }

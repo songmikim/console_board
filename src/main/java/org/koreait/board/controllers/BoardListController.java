@@ -30,7 +30,7 @@ public class BoardListController extends Controller {
                     System.out.println("1. 제목, 2. 내용, 6. 게시글 삭제");
                     String sel = inputEach("1. 항목번호", sc);
                     // 선택항목 1, 2, 3, 4 중에서만 선택가능
-                    if (!List.of("1","2", "6").contains(sel)) {
+                    if (!List.of("1","2" ,"6").contains(sel)) {
                         continue;
                     }
                     String sopt = null;
@@ -47,17 +47,18 @@ public class BoardListController extends Controller {
                     String skey = inputEach(menu == 5 ? "2. 게시글번호": "2. 검색키워드", sc);
                     search.setSkey(skey);
 
-                    /*if (menu == 5) { // 게시글 보기 화면으로 이동
-                        try {
-                            // 게시글 번호 등록
-                            long seq = Integer.parseInt(skey);
-                            BoardViewController.setSeq(seq);
-                            Router.change(BoardViewController.class);
-                        } catch (NumberFormatException e) {
-                            System.out.println("게시글 번호는 숫자로 입력하세요.");
-                        }
-                        return;
-                    }*/
+
+//                    if (menu == 5) { // 게시글 보기 화면으로 이동
+//                        try {
+//                            // 게시글 번호 등록
+//                            long seq = Integer.parseInt(skey);
+//                            BoardViewController.setSeq(seq);
+//                            Router.change(BoardViewController.class);
+//                        } catch (NumberFormatException e) {
+//                            System.out.println("게시글 번호는 숫자로 입력하세요.");
+//                        }
+//                        return;
+//                    }
                     show(); // 화면 갱신
 
                     if (menu == 6) {

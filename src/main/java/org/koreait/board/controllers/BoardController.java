@@ -23,8 +23,7 @@ public class BoardController extends Controller {
         StringBuffer sb = new StringBuffer(3500);
         sb.append("1. 게시글 작성\n")
                 .append("2. 게시글 목록\n")
-                .append("3. 게시글 수정\n")
-                .append("4. 게시글 삭제");
+                .append("3. 게시글 수정");
         System.out.println(sb);
     }
 
@@ -38,14 +37,13 @@ public class BoardController extends Controller {
                 break;
             case 2:
                 Router.change(BoardListController.class);
+                break;
                 // 목록 화면으로 이동
             case 3:
                 Router.change(BoardUpdateController.class);
-                // 수정 화면으로 이동
-            case 4:
-                Router.change(BoardViewController.class);
-                // 삭제 화면으로 이동
                 break;
+                // 수정 화면으로 이동
+
         }
 
     }
