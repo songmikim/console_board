@@ -1,6 +1,7 @@
 package org.koreait.board.services;
 
 import org.koreait.board.entities.Board;
+import org.koreait.board.mappers.BoardMapper;
 import org.koreait.global.paging.SearchForm;
 import org.koreait.member.exceptions.MemberNotFoundException;
 
@@ -20,7 +21,7 @@ public class BoardInfoService {
      * @return
      */
     public Board get(int posterId) {
-        return mapper.get(posterId).orElseThrow(MemberNotFoundException::new);
+        return (Board) mapper.get(posterId).orElseThrow(MemberNotFoundException::new);
     }
 
     public List<Board> getList(SearchForm search) {
