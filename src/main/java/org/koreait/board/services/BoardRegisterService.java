@@ -15,11 +15,11 @@ public class BoardRegisterService {
         this.mapper = mapper;
     }
 
-    public void process(Board form, String poster) {
+    public void process(Board form, int posterId) {
         validator.check(form);
 
         Board board = new Board();
-        board.setPoster(poster); // 로그인 사용자 ID
+        board.setPosterId(posterId); // 로그인 사용자 ID
         board.setSubject(form.getSubject());
         board.setContent(form.getContent());
         board.setRegDt(LocalDateTime.now());

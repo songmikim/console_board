@@ -17,10 +17,10 @@ public class BoardRegisterController extends Controller {
 
         setPrompt(() -> {
             Board form = new Board();
-            Scanner sc = new Scanner(System.in);
 
             while (true) {
                 try {
+                    Scanner sc = new Scanner(System.in);
                     String subject = inputEach("1. 제목", sc);
                     form.setSubject(subject);
 
@@ -28,10 +28,10 @@ public class BoardRegisterController extends Controller {
                     form.setContent(content);
 
                     // 현재 로그인한 사용자의 이름을 작성자로 지정
-                    String poster = MemberSession.getMember().getName();
+                    int posterid = (int)MemberSession.getMember().getSeq();
                     //form.setPoster(poster);
 
-                    service.process(form,poster);
+                    service.process(form, posterid);
                     break;
                 } catch (CommonException e) {
                     printError(e);

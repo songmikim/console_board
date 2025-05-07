@@ -11,9 +11,15 @@ public class Board {
     private String content;
     private LocalDateTime regDt;
     private LocalDateTime modDt;
-
     public void setPoster(String poster) {
 
+    }
+
+    public void setPosterId(int posterId) {
+    }
+
+    public Object getPosterId() {
+        return null;
     }
     // 1
 }
