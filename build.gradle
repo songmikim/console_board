@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.koreait'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.mindrot:jbcrypt:0.4'
+    runtimeOnly 'com.mysql:mysql-connector-j:8.4.0'
+    implementation 'org.apache.tomcat:tomcat-jdbc:11.0.6'
+    implementation 'org.mybatis:mybatis:3.5.19'
+    implementation 'ch.qos.logback:logback-classic:1.5.18'
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
