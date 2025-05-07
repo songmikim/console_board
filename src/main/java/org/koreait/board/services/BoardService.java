@@ -26,11 +26,13 @@ public class BoardService {
         return new BoardSaveService(boardMapper(), boardSaveValidator());
     }
 
+    @Bean
     private Validator<RequestBoard> boardSaveValidator() {
         return null;
     }
 
 
+    @Bean
     public BoardInfoService infoService() {
         return new BoardInfoService();
     }
