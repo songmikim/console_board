@@ -1,5 +1,6 @@
 package org.koreait.global.services;
 
+import org.koreait.board.services.BoardInfoService;
 import org.koreait.board.services.BoardService;
 import org.koreait.member.services.MemberService;
 
@@ -92,7 +93,7 @@ public class ServiceContainer {
         if (instance == null) {
             instance = new ServiceContainer();
 
-            instance.register(MemberService.class, BoardService.class);
+            instance.register(MemberService.class, BoardService.class, BoardInfoService.class);
 
             instance.init();
         }
