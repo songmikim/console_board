@@ -3,6 +3,7 @@ package org.koreait.board.services;
 import org.koreait.board.controllers.RequestBoard;
 import org.koreait.board.mappers.BoardMapper;
 import org.koreait.board.validators.BoardRegisterValidator;
+import org.koreait.board.validators.BoardSaveValidator;
 import org.koreait.global.configs.DBConn;
 import org.koreait.global.services.Bean;
 import org.koreait.global.services.Configuration;
@@ -27,8 +28,9 @@ public class BoardService {
     }
 
     @Bean
-    private Validator<RequestBoard> boardSaveValidator() {
-        return null;
+    public Validator<RequestBoard> boardSaveValidator() {
+        return new BoardSaveValidator();
+
     }
 
 
@@ -37,8 +39,10 @@ public class BoardService {
         return new BoardInfoService();
     }
 
+
     @Bean
     public BoardDeleteService deleteService() { return new BoardDeleteService(boardMapper());}
+
 
 }
 
