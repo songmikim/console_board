@@ -25,10 +25,10 @@ public class BoardListController extends Controller {
             while(true) {
                 try {
                     System.out.println("조회할 항목을 선택하세요.");
-                    System.out.println("1. 제목, 2. 내용, 3. 작성자, 4. 통합검색, 5. 게시글 보기");
+                    System.out.println("1. 제목, 2. 내용");
                     String sel = inputEach("1. 항목번호", sc);
-                    // 선택항목 1, 2, 3, 4 중에서만 선택가능
-                    if (!List.of("1","2", "3", "4", "5").contains(sel)) {
+                    // 선택항목 1, 2 중에서만 선택가능
+                    if (!List.of("1", "2").contains(sel)) {
                         continue;
                     }
                     String sopt = null;
@@ -38,8 +38,6 @@ public class BoardListController extends Controller {
                             sopt = "subject"; break;
                         case 2: // 내용
                             sopt = "content"; break;
-                        case 3: // 작성자
-                            sopt = "poster"; break;
                     }
 
                     search.setSopt(sopt);
@@ -73,12 +71,12 @@ public class BoardListController extends Controller {
         items = service.getList(search);
 
         printLine();
-        System.out.println("게시글번호|작성자|제목|내용");
+        System.out.println("게시글번호|제목|내용");
         if (items == null || items.isEmpty()) {
             System.out.println("조회된 게시글이 없습니다.");
         } else { // 게시글 출력
             items.forEach(i -> {
-                System.out.printf("%d|%s|%s|%s%n", i.getSeq(), i.getPosterId(), i.getSubject(), i.getContent());
+                System.out.printf("%d|%s|%s%n", i.getSeq(),i.getSubject(), i.getContent());
             });
         }
         printLine();
