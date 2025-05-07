@@ -1,5 +1,6 @@
 package org.koreait.board.controllers;
 
+
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.board.services.BoardSaveService;
 import org.koreait.global.router.Controller;
@@ -28,16 +29,19 @@ public class BoardUpdateController extends Controller {
         BoardUpdateController.seq = seq;
     }
 
+    @Override
     public  void show() {
         System.out.println("수정할 항목을 선택하세요(m - 메인메뉴, q - 종료).");
         System.out.println("1. 제목, 2. 내용");
 
     }
 
+    @Override
     public  void common() {
         System.out.println("******************* 게시글 수정 *******************");
     }
 
+    @Override
     public void process(String command) {
         int menu = Integer.parseInt(command);
         RequestBoard form = new RequestBoard();
@@ -46,9 +50,9 @@ public class BoardUpdateController extends Controller {
         String str = inputEach("수정할 내용 입력", sc);
 
         switch (menu) {
-            case 1:
+            case 1: // 제목
                 form.setSubject(str); break;
-            case 2:
+            case 2: // 내용1
                 form.setContent(str); break;
         }
 

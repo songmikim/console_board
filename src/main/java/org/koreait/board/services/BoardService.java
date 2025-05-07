@@ -33,11 +33,11 @@ public class BoardService {
 
     }
 
-
     @Bean
     public BoardInfoService infoService() {
         return new BoardInfoService();
     }
+
 
 
     @Bean
