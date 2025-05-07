@@ -25,12 +25,14 @@ public class BoardController extends Controller {
     @Override
     public void process(String command) {
         int menu = Integer.parseInt(command);
+        System.out.println(menu + "===================================");
         switch (menu) {
             case 1:
                 // Router.change(BoardListController.class);  // 목록
                 break;
             case 2:
-                if (isLogin()) Router.change(BoardRegisterController.class); // 등록
+                Router.change(BoardRegisterController.class); // 등록
+                //if (isLogin()) Router.change(BoardRegisterController.class); // 등록
                 break;
             case 3:
                 // if (isLogin()) Router.change(BoardViewController.class); // 상세 조회
