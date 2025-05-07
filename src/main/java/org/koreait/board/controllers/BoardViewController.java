@@ -1,7 +1,6 @@
 package org.koreait.board.controllers;
 
 import org.koreait.board.entities.Board;
-import org.koreait.board.entities.Board;
 import org.koreait.board.exceptions.BoardNotFoundException;
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.global.router.Controller;
