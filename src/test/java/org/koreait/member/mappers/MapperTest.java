@@ -14,15 +14,15 @@ public class MapperTest {
 
     @Test
     void test1() {
-//        Member member = new Member();
-//        member.setEmail("user01@test.org");
-//        member.setPassword("12345678");
-//        member.setName("사용자01");
-//        member.setTerms(true);
-//        member.setMobile("01034812101");
-//
-//        int affectedRows = mapper.register(member);
-//        System.out.println(affectedRows);
+        Member member = new Member();
+        member.setEmail("user01@test.org");
+        member.setPassword("12345678");
+        member.setName("사용자01");
+        member.setTerms(true);
+        member.setMobile("01034812101");
+
+        int affectedRows = mapper.register(member);
+        System.out.println(affectedRows);
 
 //        Member member = mapper.get("user01@test.org").orElse(null);
 //        System.out.println(member);
