@@ -4,15 +4,12 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.koreait.board.mappers.BoardMapper">
     <insert id="register" useGeneratedKeys="true" keyProperty="seq">
-        INSERT INTO board (posterId, subject, content, memberSeq)
-        VALUES (#{posterId}, #{subject}, #{content}, #{memberSeq})
+        INSERT INTO board (subject, content, seq)
+        VALUES (#{subject}, #{content}, #{seq})
     </insert>
     <update id="update">
         UPDATE board
         <set>
-            <if test="posterId != null">
-                posterId = #{posterId},
-            </if>
             <if test="subject != null">
                 subject = #{subject},
             </if>
@@ -35,13 +32,10 @@
 
     <select id="getList">
         SELECT b.*, m.name, m.email FROM board b
-        LEFT JOIN member m ON b.memberSeq = m.seq
+        LEFT JOIN member m ON b.Seq = m.seq
         <where>
             <if test="skey != null">
                 <bind name="keyword" value="'%' + _parameter.getSkey() + '%'" />
-                <if test="sopt == 'poster'">
-                    posterId LIKE #{keyword}
-                </if>
                 <if test="sopt == 'subject'">
                     AND subject LIKE #{keyword}
                 </if>
@@ -49,7 +43,7 @@
                     AND content LIKE #{keyword}
                 </if>
                 <if test="sopt == null">
-                    CONCAT(posterId, subject, content) LIKE #{keyword}
+                    CONCAT(subject, content) LIKE #{keyword}
                 </if>
             </if>
         </where>
