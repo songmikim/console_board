@@ -2,41 +2,42 @@ package org.koreait.board.controllers;
 
 import org.koreait.global.router.Controller;
 import org.koreait.global.router.Router;
+import org.koreait.main.controllers.MainController;
+import org.koreait.member.MemberSession;
 
 import java.util.List;
-import static org.koreait.member.MemberSession.isLogin;
-public class BoardController extends Controller {
 
+public class BoardController extends Controller {
+    public BoardController() {
+        setMenus(List.of("1", "2"));
+    }
     @Override
     public void show() {
-        setMenus(isLogin() ? List.of("1", "2", "3") : List.of("1"));
-
-        StringBuffer sb = new StringBuffer(2500);
-        if (isLogin()) {
-            sb.append("1. 게시글 목록\n")
-                    .append("2. 게시글 등록\n")
-                    .append("3. 게시글 상세 조회");
-        } else {
-            sb.append("1. 게시글 목록"); // 비회원은 목록만 볼 수 있음
+        // 로그인 상태가 아니라면 메인 페이지로 이동
+        if (!MemberSession.isLogin()) {
+            System.out.println("로그인이 필요합니다.");
+            Router.change(MainController.class);
+            return;
         }
+
+        StringBuffer sb = new StringBuffer(3500);
+        sb.append("1. 게시글 작성\n")
+                .append("2. 게시글 목록");
         System.out.println(sb);
     }
 
     @Override
     public void process(String command) {
         int menu = Integer.parseInt(command);
-        System.out.println(menu + "===================================");
+
         switch (menu) {
             case 1:
-                // Router.change(BoardListController.class);  // 목록
+                Router.change(BoardRegisterController.class); // 게시글 작성 화면으로 이동
                 break;
             case 2:
-                Router.change(BoardRegisterController.class); // 등록
-                //if (isLogin()) Router.change(BoardRegisterController.class); // 등록
-                break;
-            case 3:
-                // if (isLogin()) Router.change(BoardViewController.class); // 상세 조회
+                Router.change(BoardListController.class); // 게시글 목록 화면으로 이동
                 break;
         }
+
     }
 }
