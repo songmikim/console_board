@@ -30,6 +30,7 @@ public class BoardService {
     @Bean
     public Validator<RequestBoard> boardSaveValidator() {
         return new BoardSaveValidator();
+
     }
 
     @Bean
@@ -38,4 +39,10 @@ public class BoardService {
     }
 
 
+
+    @Bean
+    public BoardDeleteService deleteService() { return new BoardDeleteService(boardMapper());}
+
+
 }
+

@@ -24,7 +24,7 @@ public class BoardViewController extends Controller {
 
     @Override
     public void show() {
-        if (seq < 1L) throw new BoardNotFoundException();
+        if (seq < 1L) throw new BoardNotFoundException("게시글을 찾을 수 없습니다.");
         // 게시글 조회
         Board item = service.get(seq);
 
