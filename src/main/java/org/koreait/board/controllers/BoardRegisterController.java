@@ -17,10 +17,10 @@ public class BoardRegisterController extends Controller {
 
         setPrompt(() -> {
             Board form = new Board();
-            Scanner sc = new Scanner(System.in);
 
             while (true) {
                 try {
+                    Scanner sc = new Scanner(System.in);
                     String subject = inputEach("1. 제목", sc);
                     form.setSubject(subject);
 
