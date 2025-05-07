@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.koreait.board.mappers.BoardMapper;
 import org.koreait.member.mappers.MemberMapper;
 
 public class DBConn {
@@ -51,6 +52,8 @@ public class DBConn {
         configuration.setLogImpl(Slf4jImpl.class);
 
         configuration.addMapper(MemberMapper.class);
+
+        configuration.addMapper(BoardMapper.class);
 
         return new SqlSessionFactoryBuilder().build(configuration);
     }

@@ -1,5 +1,7 @@
 package org.koreait.board.controllers;
 
+import org.koreait.board.entities.Board;
+import org.koreait.board.services.BoardRegisterService;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.router.Controller;
 import org.koreait.global.router.Router;
@@ -26,10 +28,10 @@ public class BoardRegisterController extends Controller {
                     form.setContent(content);
 
                     // 현재 로그인한 사용자의 이름을 작성자로 지정
-                    String poster = MemberSession.getMember().getName();
+                    int posterid = (int)MemberSession.getMember().getSeq();
                     //form.setPoster(poster);
 
-                    service.process(form,poster);
+                    service.process(form, posterid);
                     break;
                 } catch (CommonException e) {
                     printError(e);
