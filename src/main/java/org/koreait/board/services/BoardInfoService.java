@@ -29,7 +29,7 @@ public class BoardInfoService {
      */
     public Board get(long seq) {
         updateMapper();
-        return mapper.get(seq).orElseThrow(BoardNotFoundException::new);
+        return mapper.get(seq).orElseThrow(() -> new BoardNotFoundException("게시글을 찾을 수 없습니다."));
     }
 
     /**
@@ -45,6 +45,7 @@ public class BoardInfoService {
         int limit = search.getLimit();
         limit = limit < 1 ? 10 : limit;
         int offset = (page - 1) * limit;
+
         search.setPage(page);
         search.setOffset(offset);
         search.setLimit(limit);
@@ -52,4 +53,9 @@ public class BoardInfoService {
         // 페이징 기본값 처리 E
         return mapper.getList(search);
     }
+
+    public BoardMapper getMapper() {
+        return null;
+    }
 }
+

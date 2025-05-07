@@ -17,6 +17,7 @@ public class BoardSaveService {
     }
 
     public void process(RequestBoard form) {
+
         validator.check(form);
 
         Board item = new Board();
@@ -41,3 +42,4 @@ public class BoardSaveService {
 
     }
 }
+

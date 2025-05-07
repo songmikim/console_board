@@ -6,6 +6,7 @@ import org.koreait.board.services.BoardRegisterService;
 import org.koreait.board.controllers.BoardListController;
 import org.koreait.board.controllers.BoardRegisterController;
 import org.koreait.board.entities.Board;
+import org.koreait.board.services.BoardDeleteService;
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.board.services.BoardRegisterService;
 import org.koreait.global.services.ServiceContainer;
@@ -66,7 +67,8 @@ public class ControllerConfig {
 
 
     public BoardListController boardListController() {
-        BoardInfoService service = ServiceContainer.getBean(BoardInfoService.class);;
-        return new BoardListController(service);
+        BoardInfoService service = ServiceContainer.getBean(BoardInfoService.class);
+        BoardDeleteService deleteService = ServiceContainer.getBean(BoardDeleteService.class);
+        return new BoardListController(service, deleteService);
     }
 }

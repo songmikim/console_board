@@ -1,6 +1,7 @@
 package org.koreait.board.controllers;
 
 import org.koreait.board.entities.Board;
+import org.koreait.board.services.BoardDeleteService;
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.paging.SearchForm;
@@ -12,11 +13,13 @@ import java.util.Scanner;
 
 public class BoardListController extends Controller {
     private final BoardInfoService service;
+    private final BoardDeleteService deleteService;
     private List<Board> items;
     private SearchForm search;
 
-    public BoardListController(BoardInfoService service) {
+    public BoardListController(BoardInfoService service,  BoardDeleteService deleteService) {
         this.service = service;
+        this.deleteService = deleteService;
         search = new SearchForm();
 
         Scanner sc = new Scanner(System.in);
@@ -25,10 +28,10 @@ public class BoardListController extends Controller {
             while(true) {
                 try {
                     System.out.println("조회할 항목을 선택하세요.");
-                    System.out.println("1. 제목, 2. 내용");
+                    System.out.println("1. 제목, 2. 내용, 3. 작성자, 4. 통합검색, 5. 게시글 보기, 6. 게시글 삭제");
                     String sel = inputEach("1. 항목번호", sc);
-                    // 선택항목 1, 2 중에서만 선택가능
-                    if (!List.of("1", "2").contains(sel)) {
+                    // 선택항목 1, 2, 3, 4 중에서만 선택가능
+                    if (!List.of("1","2", "3", "4", "5", "6").contains(sel)) {
                         continue;
                     }
                     String sopt = null;
@@ -57,6 +60,19 @@ public class BoardListController extends Controller {
                         return;
                     }
                     show(); // 화면 갱신
+
+                    if (menu == 6) {
+                        try {
+                            long seq = Integer.parseInt(skey);
+                            deleteService.delete(seq);  // 실제 삭제 처리
+                            System.out.println("게시글이 성공적으로 삭제되었습니다.");
+                        } catch (NumberFormatException e) {
+                            System.out.println("게시글 번호는 숫자로 입력하세요.");
+                        } catch (CommonException e) {
+                            printError(e);
+                        }
+                        return;
+                    }
                 } catch (CommonException e) {
                     printError(e);
                 }

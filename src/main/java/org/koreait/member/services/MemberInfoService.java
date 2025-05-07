@@ -21,7 +21,7 @@ public class MemberInfoService {
      * @return
      */
     public Member get(String email) {
-        return mapper.get(email).orElseThrow(MemberNotFoundException::new);
+        return mapper.get(email).orElseThrow(() -> new MemberNotFoundException("로그인된 회원이 없습니다."));
     }
 
     public List<Member> getList(SearchForm search) {

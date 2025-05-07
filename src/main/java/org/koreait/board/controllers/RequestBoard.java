@@ -8,4 +8,7 @@ public class RequestBoard {
     private int posterId;
     private String subject;
     private String content;
+
+    public void setPoster(String name) {
+    }
 }

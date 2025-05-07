@@ -3,6 +3,7 @@ package org.koreait.member.mappers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.koreait.global.configs.DBConn;
+import org.koreait.member.entities.Member;
 
 public class MapperTest {
     private MemberMapper mapper;
