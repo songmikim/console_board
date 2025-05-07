@@ -35,8 +35,5 @@ public class BoardService {
         return new BoardInfoService();
     }
 
-    private Validator<RequestBoard> boardSaveValidator() {
-        return null;
-    }
 
 }

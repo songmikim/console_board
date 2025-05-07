@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BoardController extends Controller {
     public BoardController() {
-        setMenus(List.of("1", "2"));
+        setMenus(List.of("1", "2", "3", "4"));
     }
     @Override
     public void show() {
@@ -34,14 +34,17 @@ public class BoardController extends Controller {
 
         switch (menu) {
             case 1:
-                Router.change(BoardRegisterController.class); // 게시글 작성 화면으로 이동
+                Router.change(BoardRegisterController.class); // 작성 화면으로 이동
                 break;
             case 2:
-                Router.change(BoardListController.class); // 게시글 목록 화면으로 이동
+                Router.change(BoardListController.class);
+                // 목록 화면으로 이동
             case 3:
-                Router.change(BoardUpdateController.class); // 게시글 목록 화면으로 이동
+                Router.change(BoardUpdateController.class);
+                // 수정 화면으로 이동
             case 4:
-                Router.change(BoardViewController.class); // 게시글 목록 화면으로 이동
+                Router.change(BoardViewController.class);
+                // 삭제 화면으로 이동
                 break;
         }
 
