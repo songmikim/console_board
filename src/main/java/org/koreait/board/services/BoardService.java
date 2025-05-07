@@ -1,6 +1,6 @@
 package org.koreait.board.services;
 
-import org.koreait.board.controllers.RequestBoard;
+import org.koreait.board.entities.Board;
 import org.koreait.board.mappers.BoardMapper;
 import org.koreait.board.validators.BoardRegisterValidator;
 import org.koreait.board.validators.BoardSaveValidator;
@@ -28,9 +28,8 @@ public class BoardService {
     }
 
     @Bean
-    public Validator<RequestBoard> boardSaveValidator() {
+    public Validator<Board> boardSaveValidator() {
         return new BoardSaveValidator();
-
     }
 
     @Bean

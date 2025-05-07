@@ -1,6 +1,7 @@
 package org.koreait.board.controllers;
 
 
+import org.koreait.board.entities.Board;
 import org.koreait.board.services.BoardInfoService;
 import org.koreait.board.services.BoardSaveService;
 import org.koreait.global.router.Controller;
@@ -31,9 +32,9 @@ public class BoardUpdateController extends Controller {
 
     @Override
     public  void show() {
-        System.out.println("수정할 항목을 선택하세요(m - 메인메뉴, q - 종료).");
-        System.out.println("1. 제목, 2. 내용");
-
+        //System.out.println("수정할 항목을 선택하세요(m - 메인메뉴, q - 종료).");
+        //System.out.println("1. 제목, 2. 내용");
+        System.out.println("수정할 게시글 번호를 입력하세요 (m - 메인메뉴, q - 종료):");
     }
 
     @Override
@@ -43,22 +44,41 @@ public class BoardUpdateController extends Controller {
 
     @Override
     public void process(String command) {
-        int menu = Integer.parseInt(command);
-        RequestBoard form = new RequestBoard();
-
         Scanner sc = new Scanner(System.in);
-        String str = inputEach("수정할 내용 입력", sc);
 
-        switch (menu) {
-            case 1: // 제목
-                form.setSubject(str); break;
-            case 2: // 내용1
-                form.setContent(str); break;
+        // 게시글 번호 입력
+        long inputSeq;
+        try {
+            inputSeq = Long.parseLong(command);
+        } catch (NumberFormatException e) {
+            System.out.println("잘못된 번호입니다.");
+            return;
         }
 
-        saveService.process(form);
+        Board form = new Board();
+        form.setSeq(inputSeq);  // 입력 받은 번호 설정
 
-        BoardViewController.setSeq(seq);
+        System.out.println("수정할 항목을 선택하세요:");
+        System.out.println("1. 제목, 2. 내용");
+        String menuInput = sc.nextLine();
+
+        System.out.print("수정할 내용을 입력하세요: ");
+        String contentInput = sc.nextLine();
+
+        switch (menuInput) {
+            case "1":
+                form.setSubject(contentInput); break;
+            case "2":
+                form.setContent(contentInput); break;
+            default:
+                System.out.println("잘못된 선택입니다.");
+                return;
+        }
+
+        saveService.process(form); // BoardUpdateService 호출
+
+        // 이후 게시글 보기로 이동
+        BoardViewController.setSeq(inputSeq);
         Router.change(BoardViewController.class);
     }
 }

@@ -1,5 +1,6 @@
 package org.koreait.board.controllers;
 
+import org.koreait.board.entities.Board;
 import org.koreait.board.services.BoardSaveService;
 import org.koreait.global.exceptions.CommonException;
 import org.koreait.global.router.Controller;
@@ -16,10 +17,10 @@ public class BoardWriteController extends Controller {
         this.service = service;
 
         Scanner sc = new Scanner(System.in);
-        RequestBoard form = new RequestBoard();
+        Board form = new Board();
         // 로그인한 회원 이름으로 작성자를 완성
         Member member = MemberSession.getMember();
-        form.setPoster(member.getName());
+        form.setPosterId((int)member.getSeq()); // ***
 
         setPrompt(() -> {
             while(true) {
