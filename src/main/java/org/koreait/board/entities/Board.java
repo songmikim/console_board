@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class Board {
     private long seq;
     private int posterId;
+    private String name;
     private String subject;
     private String content;
     private LocalDateTime regDt;
