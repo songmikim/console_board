@@ -27,8 +27,9 @@ public class BoardRegisterController extends Controller {
                     String content = inputEach("2. 내용", sc);
                     form.setContent(content);
 
-                    // 현재 로그인한 사용자의 seq를 작성자id로 지정
+                    // 현재 로그인한 사용자의 이름을 작성자로 지정
                     int posterid = (int)MemberSession.getMember().getSeq();
+                    //form.setPoster(poster);
 
                     service.process(form, posterid);
                     break;
